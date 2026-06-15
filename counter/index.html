@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#111111">
+  <title>タップカウンター</title>
+
+  <style>
+    html, body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      touch-action: manipulation;
+      user-select: none;
+      font-family: sans-serif;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #111;
+      color: white;
+    }
+
+    #counter {
+      font-size: 120px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="counter">0</div>
+
+  <script>
+    let count = 0;
+
+    document.body.addEventListener("pointerdown", () => {
+      count++;
+      document.getElementById("counter").textContent = count;
+    });
+  </script>
+</body>
+</html>
