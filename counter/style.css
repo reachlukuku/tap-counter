@@ -1,0 +1,23 @@
+html, body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+  overflow: hidden;
+  font-family: sans-serif;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #111;
+  color: white;
+}
+
+#counter {
+  font-size: 120px;
+  font-weight: bold;
+}
