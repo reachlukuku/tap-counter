@@ -4,6 +4,7 @@ const counter = document.getElementById("counter");
 const resetButton = document.getElementById("resetButton");
 let count = 0;
 let lastTapTime = 0;
+let activePointers = new Set();
 
 const subcounter = document.getElementById("subcounter");
 const subplusButton = document.getElementById("subplusButton");
@@ -34,6 +35,12 @@ document.body.addEventListener("pointerdown", (event) => {
             return; // ボタンイベントのときはスキップ
         }
 
+    if(activePointers.size >0){
+        activePointers.add(event.pointerId);
+        return;
+    }
+    activePointers.add(event.pointerId);
+
     const now = Date.now();
     if(now - lastTapTime < 200){
         return;
@@ -52,6 +59,14 @@ document.body.addEventListener("pointerdown", (event) => {
         clickSound.play().catch(() => {});
     }
 });
+
+document.body.addEventListener("pointerup",(event)=>{
+    activePointers.delete(event.pointerId);
+})
+
+document.body.addEventListener("pointercancel",(event)=>{
+    activePointers.delete(event.pointerId);
+})
 
 // ボタンが押されたときの処理
 resetButton.addEventListener("click",()=>{
