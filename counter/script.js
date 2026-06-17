@@ -3,6 +3,7 @@
 const counter = document.getElementById("counter");
 const resetButton = document.getElementById("resetButton");
 let count = 0;
+let lastTapTime = 0;
 
 const subcounter = document.getElementById("subcounter");
 const subplusButton = document.getElementById("subplusButton");
@@ -32,6 +33,12 @@ document.body.addEventListener("pointerdown", (event) => {
         event.target === subresetButton ){
             return; // ボタンイベントのときはスキップ
         }
+
+    const now = Date.now();
+    if(now - lastTapTime < 200){
+        return;
+    }
+    lastTapTime = now;
 
     count++;
     counter.textContent = count;
