@@ -10,11 +10,22 @@
 </head>
 
 <body>
+
   <div id="counter">0</div>
   
   <div id="subcounterArea">
     <span id="subcounter">1</span>セット目
   </div>
+  
+  <div id="timerArea">
+    休憩 <span id="timerDisplay">00:15</span>
+  </div>
+  
+  <div id="timerButtons">
+    <button id="timerStartButton">START</button>
+    <button id="timerResetButton">RESET</button>
+  </div>
+
   <div id="setButtons">
     <button id="subplusButton">+</button>
     <button id="subresetButton">reset</button>
@@ -24,5 +35,12 @@
   <button id="resetButton">回数リセット</button>
 
   <script src="script.js"></script>
+  <!--
+  <script>
+    if('serviceWorker' in navigator){
+      navigator.serviceWorker.register('./sw.js');
+    }
+  </script>
+-->
 </body>
 </html>

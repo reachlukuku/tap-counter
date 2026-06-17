@@ -10,12 +10,20 @@ const subminusButton = document.getElementById("subminusButton");
 const subresetButton = document.getElementById("subresetButton");
 let subcount = 1;
 
+const timerDisplay = document.getElementById("timerDisplay");
+const timerStartButton = document.getElementById("timerStartButton");
+const timerResetButton = document.getElementById("timerResetButton");
+let timerSeconds = 15;
+
 // 音ファイル読み込み
 const clickSound = new Audio("sound/click.mp3");
 const click10Sound = new Audio("sound/click10.mp3");
+const clearSound = new Audio("sound/clear.mp3");
+const pushSound = new Audio("sound/push.mp3");
 clickSound.preload = "auto";
 click10Sound.preload = "auto";
 
+/////////////////////////////////////////
 // 画面が押されたときの処理
 document.body.addEventListener("pointerdown", (event) => {
     if( event.target === resetButton ||
@@ -42,22 +50,41 @@ document.body.addEventListener("pointerdown", (event) => {
 resetButton.addEventListener("click",()=>{
     count = 0;
     counter.textContent = count;
+    clearSound.currentTime = 0;
+    clearSound.play().catch(() => {});
 });
 
-
+/////////////////////////////////////////
 // サブカウンターの処理
 subplusButton.addEventListener("click", () => {
     subcount++;
     subcounter.textContent = subcount;
+    pushSound.currentTime = 0;
+    pushSound.play().catch(() => {});
 });
 
 subminusButton.addEventListener("click", () => {
     if(subcount<=1) return;
     subcount--;
     subcounter.textContent = subcount;
+    pushSound.currentTime = 0;
+    pushSound.play().catch(() => {});
 });
 
 subresetButton.addEventListener("click", () => {
     subcount = 1;
     subcounter.textContent = subcount;
+    clearSound.currentTime = 0;
+    clearSound.play().catch(() => {});
 });
+
+/////////////////////////////////////////
+// 休憩タイマー
+function updateTimerDisplay() {
+
+    const min = Math.floor(timerSeconds / 60);
+    const sec = timerSeconds % 60;
+
+    timerDisplay.textContent =
+        `${String(min).padStart(2, "0")}:${String(sec).padStart(2, "0")}`;
+}
